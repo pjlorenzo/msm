@@ -29,7 +29,7 @@ namespace basket.Unit.Tests
         {
             var items = new List<Item>();
             items.Add(new Item { Id = 1, Price = 0.80m, ProductId = 1, Quantity = 2 });
-            items.Add(new Item { Id = 2, Price = 0.80m, ProductId = 2, Quantity = 2 });
+            items.Add(new Item { Id = 2, Price = 1m, ProductId = 2, Quantity = 1 });
 
             var discount = new PercentageDiscount();
 

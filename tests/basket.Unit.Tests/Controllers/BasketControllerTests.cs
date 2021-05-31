@@ -30,7 +30,7 @@ namespace basket.Unit.Tests.Controllers
         [Fact]
         public void ShouldBeAssignableToController()
         {
-            typeof(BasketController).Should().BeAssignableTo<Controller>();
+            typeof(BasketController).Should().BeAssignableTo<ControllerBase>();
         }
 
         [Fact]

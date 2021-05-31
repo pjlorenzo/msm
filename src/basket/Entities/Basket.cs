@@ -7,6 +7,7 @@ namespace basket.Entities
 {
     public class Basket : IBasket
     {
+        private readonly IDiscount _discount;
 
         public int Id { get; set; }
         public string CustomerId { get; private set; }
@@ -22,6 +23,7 @@ namespace basket.Entities
         public Basket(string customerId, IDiscount discount) : base()
         {
             CustomerId = customerId ?? throw new ArgumentNullException();
+            _discount = discount ?? throw new ArgumentNullException();
             Items = new List<Item>();
         }
 

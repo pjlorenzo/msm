@@ -8,33 +8,30 @@ namespace basket.Entities
     {
         public decimal Calculate(List<Item> items)
         {
-            throw new NotImplementedException();
+            // bread = 2
+            var requiredItemsForDiscount = items.Where(p => p.ProductId == 1).Sum(q => q.Quantity);
+            var applyDiscountToCount = items.Where(p => p.ProductId == 2).Sum(q => q.Quantity);
+            var targetProduct = items.FirstOrDefault(p => p.ProductId == 2);
+
+            var discountApplicables = requiredItemsForDiscount / 2;
+
+            if (applyDiscountToCount <= discountApplicables)
+            {
+                discountApplicables = discountApplicables - (discountApplicables - applyDiscountToCount);
+            }
+
+            var discountAmount = (0.5M) * targetProduct.Price;
+
+            return discountApplicables * discountAmount;
         }
 
         public bool DiscountApplycable(List<Item> items)
         {
             //butter id =1
-            //var requiredItemsForDiscount = items.Where(p => p.ProductId == 1).ToList();
-            //var minimunRequiredItems = requiredItemsForDiscount.Sum(p => p.Quantity);
+            var requiredItemsForDiscount = items.Where(p => p.ProductId == 1).Sum(q=>q.Quantity);
 
-            // bread id =2
-            var itemToApplyTheDiscount = items.Where(p => p.ProductId == 2).ToList();
-            var minimunRequiredItemsToApplyDiscount = itemToApplyTheDiscount.Sum(p => p.Quantity);
+            return (requiredItemsForDiscount == 0 || requiredItemsForDiscount < 2) ? false : true; 
 
-            if (MinimunRequiredItems(items) || minimunRequiredItemsToApplyDiscount < 1)
-            { return false; }
-            else
-            {
-                return true;            
-            }
-        }
-
-        private bool MinimunRequiredItems(List<Item> items)
-        {
-            var requiredItemsForDiscount = items.Where(p => p.ProductId == 1).ToList();
-            var minimunRequiredItems = requiredItemsForDiscount.Sum(p => p.Quantity);
-
-            return minimunRequiredItems == 0 || minimunRequiredItems < 2 ? false : true;
-        }
+        } 
     }
 }
