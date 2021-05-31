@@ -1,29 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
 namespace basket.Entities
 {
-    public class Basket
+    public class Basket : IBasket
     {
 
+        public int Id { get; set; }
         public string CustomerId { get; private set; }
-        public List<Product> Products { get; internal set; }
+        public List<Item> Items { get; set; }
+        [NotMapped]
+        public decimal Total { get; set; }
 
-        public Basket(string customerId)
+        public Basket()
+        {
+            Items = new List<Item>();
+        }
+
+        public Basket(string customerId, IDiscount discount) : base()
         {
             CustomerId = customerId ?? throw new ArgumentNullException();
-            Products = new List<Product>();
+            Items = new List<Item>();
         }
 
-        public void Add(string productId, decimal price, int quantity)
+        public void Add(int productId, decimal price, int quantity)
         {
-            Products.Add(new Product(productId, price, quantity));
+            Items.Add(new Item { ProductId = productId, Price = price, Quantity = quantity });
+
+            Total = CalculateTotal();
         }
 
-        public decimal Total()
+        internal decimal CalculateTotal()
         {
-            return Products.Sum(p => p.Quantity * p.Price);
+            return Items.Sum(p => p.Quantity * p.Price);
         }
     }
 }
