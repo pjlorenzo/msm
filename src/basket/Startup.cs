@@ -40,13 +40,13 @@ namespace basket
 
             services.AddDbContext<BasketDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            //services.AddTransient<IBasket, Basket>();
+            
             services.AddTransient<IBasketRepository, BasketRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
             var butterConditionProduct = new Product { Id = 1, Price = 0.80M, Quantity = 2, Description = "Butter" };
-            var breadTargetDiscountProduct = new Product { Id = 2, Price = 1M, Quantity = 2, Description = "Bread" };
+            var breadTargetDiscountProduct = new Product { Id = 3, Price = 1M, Quantity = 2, Description = "Bread" };
             services.AddTransient<IDiscount>(p => new PercentageDiscount(breadTargetDiscountProduct,0.5M,butterConditionProduct));
-            var milkProductCondition = new Product { Id = 3, Price = 1.15M, Quantity = 4, Description = "Milk" };
+            var milkProductCondition = new Product { Id = 2, Price = 1.15M, Quantity = 4, Description = "Milk" };
             services.AddTransient<IDiscount>(p=> new QuantityProductDiscount(milkProductCondition, 1.15M));
             
 

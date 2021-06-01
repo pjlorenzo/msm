@@ -10,10 +10,7 @@ namespace basket.Mappings
         {
             CreateMap<Basket, BasketDTO>()
                    .ForMember(dto => dto.Total, opt => opt.Ignore());
-                   
-                   
-                   
-            
+
             CreateMap<BasketDTO, Basket>();
 
             CreateMap<Item, ItemDTO>()

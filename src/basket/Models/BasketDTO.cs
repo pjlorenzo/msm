@@ -19,9 +19,9 @@ namespace basket.Models
             Items = new List<ItemDTO>();
             var _di = new List<IDiscount>();
             var butterConditionProduct = new Product { Id = 1, Price = 0.80M, Quantity = 2, Description = "Butter" };
-            var breadTargetDiscountProduct = new Product { Id = 2, Price = 1M, Quantity = 2, Description = "Bread" };
+            var breadTargetDiscountProduct = new Product { Id = 3, Price = 1M, Quantity = 2, Description = "Bread" };
             _di.Add(new PercentageDiscount(breadTargetDiscountProduct, 0.5M, butterConditionProduct));
-            var milkProductCondition = new Product { Id = 3, Price = 1.15M, Quantity = 4, Description = "Milk" };
+            var milkProductCondition = new Product { Id = 2, Price = 1.15M, Quantity = 4, Description = "Milk" };
             _di.Add(new QuantityProductDiscount(milkProductCondition, 1.15M));
 
             _discounts = _di.AsEnumerable<IDiscount>();
