@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using basket.Models;
+using System.Collections.Generic;
 
 namespace basket.Entities
 {
     public interface IDiscount
     {
-        bool DiscountApplycable(List<Item> items);
-        decimal Calculate(List<Item> items);
+        bool DiscountApplycable(List<ItemDTO> items);
+        decimal Calculate(List<ItemDTO> items);
     }
 }

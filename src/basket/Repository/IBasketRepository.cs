@@ -1,4 +1,5 @@
 ﻿using basket.Entities;
+using basket.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,8 @@ namespace basket.Repository
 {
     public interface IBasketRepository
     {
-        Basket Get(string CustomerId);
+        BasketDTO Get(string CustomerId);
+        void Add(BasketDTO basket);
+        void Update(BasketDTO basket);
     }
 }

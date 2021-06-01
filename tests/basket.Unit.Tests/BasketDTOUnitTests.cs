@@ -1,34 +1,36 @@
 using basket.Entities;
+using basket.Models;
 using FakeItEasy;
 using FluentAssertions;
 using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace basket.Unit.Tests
 {
-    public class BasketUnitTests
+    public class BasketDTOUnitTests
     {
         private readonly string _customerId;
-        private readonly IDiscount _discount;
-        private readonly Basket _basket;
+        private readonly IEnumerable<IDiscount> _discount;
+        private readonly BasketDTO _basket;
 
-        public BasketUnitTests()
+        public BasketDTOUnitTests()
         {
             _customerId = "123456789";
-            _discount = A.Fake<IDiscount>();
-            _basket = new Basket(_customerId, _discount);
+            _discount = A.Fake<IEnumerable<IDiscount>>();
+            _basket = new BasketDTO(_customerId, _discount);
         }
         [Fact]
         public void Constructor_GivenNullCustomerId_ThrowsArgumentNullException()
         {
-            Action constructor = () => new Basket(null,_discount);
+            Action constructor = () => new BasketDTO(null,_discount);
             constructor.Should().Throw<ArgumentNullException>();
         }
 
         [Fact]
         public void Constructor_GivenNullIDiscount_ThrowsArgumentNullException()
         {
-            Action constructor = () => new Basket(_customerId, null);
+            Action constructor = () => new BasketDTO(_customerId, null);
             constructor.Should().Throw<ArgumentNullException>();
         }
 

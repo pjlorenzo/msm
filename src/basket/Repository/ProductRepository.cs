@@ -13,7 +13,7 @@ namespace basket.Repository
         }
         public Product Get(int id)
         {
-            return _basketDbContext.Products.FirstOrDefault(p => p.ProductId == id);
+            return _basketDbContext.Products.FirstOrDefault(p => p.Id == id);
         }
     }
 }
